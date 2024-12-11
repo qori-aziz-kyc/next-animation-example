@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Circle, Layer, Rect, Stage } from "react-konva";
 
@@ -15,6 +15,7 @@ export default function Home() {
   }
 
   const stageRef = React.useRef(null);
+  const rectRef = useRef(null);
 
   const handleExport = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -29,6 +30,12 @@ export default function Home() {
   };
   const size = useWindowSize();
 
+  const handleDrag = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    rectRef.current.moveToTop();
+  };
+
   return (
     <>
       <button type="button" onClick={handleExport}>
@@ -41,7 +48,16 @@ export default function Home() {
         ref={stageRef}
       >
         <Layer>
-          <Rect x={200} y={200} width={50} height={50} fill="red" draggable />
+          <Rect
+            x={200}
+            y={200}
+            width={50}
+            height={50}
+            fill="red"
+            draggable
+            ref={rectRef}
+            onDragStart={handleDrag}
+          />
           <Circle x={200} y={200} stroke="blue" radius={50} draggable />
         </Layer>
       </Stage>
