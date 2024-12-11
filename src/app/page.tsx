@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <>
       <button type="button" onClick={handleExport}>
-        Click here to log stage data URL
+        Click here to save image
       </button>
       <Stage
         className="stage"
@@ -59,6 +59,16 @@ export default function Home() {
             onDragStart={handleDrag}
           />
           <Circle x={200} y={200} stroke="blue" radius={50} draggable />
+          <Rect
+            x={200}
+            y={200}
+            width={50}
+            height={50}
+            fill="red"
+            draggable
+            ref={rectRef}
+            onDragStart={handleDrag}
+          />
         </Layer>
       </Stage>
     </>
